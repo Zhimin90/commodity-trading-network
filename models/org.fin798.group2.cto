@@ -1,0 +1,132 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+* My commodity trading network
+*/
+
+namespace org.fin798.group2
+
+import org.accordproject.cicero.contract.* from https://models.accordproject.org/cicero/contract.cto
+import org.accordproject.organization.* from https://models.accordproject.org/organization.cto
+import org.accordproject.signature.ContractSigned from https://models.accordproject.org/signature/signature.cto
+//demonstrate importing local cto file
+import org.test.*
+
+enum contractState {
+o Drafted //any one can initialize contract to be drafted
+o Active //owner of the contract can set it to active
+o Completed //contract clauses met condition
+o Signed //contract clauses met condition and signed all required participant/s
+o Void //contract state has failed and is irreversable
+}
+
+participant commodityProducer extends AccordParty {
+//inherit unique id from AccordParty
+o Organization organizationInfo
+}
+
+participant commodityPurchaser extends AccordParty {
+//inherit unique id from AccordParty
+o Organization organizationInfo
+}
+
+participant Inspector extends AccordParty {
+//inherit unique id from AccordParty
+o Organization organizationInfo
+}
+
+participant Customs extends AccordParty {
+//inherit unique id from AccordParty
+o Organization organizationInfo
+}
+
+participant trustedVendor extends AccordParty {
+//inherit unique id from AccordParty
+o Organization organizationInfo
+}
+
+
+asset shippingTermsContract extends AccordContract {
+//AccordContract inherit contract Id only. This will provide future compatible model for ERGO contract logic
+--> trustedVendor[] vendors
+--> commodityPurchaser Buyer
+--> commodityProducer goodsOwner
+
+--> oilBarrel[] inspectedGoods //assets tied to this contract
+
+o AccordClause[] contractClauses //English terms of the inspection the inspector will verify
+o AccordContractState contractState  
+}
+
+asset billOfLandingContract extends AccordContract {
+//AccordContract inherit contract Id only. This will provide future compatible model for ERGO contract logic
+--> Customs customs
+--> commodityProducer goodsOwner
+
+--> oilBarrel[] inspectedGoods //assets tied to this contract
+
+o AccordClause[] contractClauses //English terms of the inspection the inspector will verify
+o AccordContractState contractState
+}
+
+asset inspectionContract extends AccordContract {
+//AccordContract inherit contract Id only. This will provide future compatible model for ERGO contract logic
+--> Inspector inspector
+--> commodityProducer goodsOwner
+
+--> oilBarrel[] inspectedGoods //assets tied to this contract
+
+o AccordClause[] contractClauses //English terms of the inspection the inspector will verify
+o AccordContractState contractState
+}
+
+asset masterContract extends AccordContract {
+--> shippingTermsContract shippingTerms
+--> billOfLandingContract billOfLandingTerms
+--> inspectionContract inspectionTerms
+
+--> commodityPurchaser Buyer
+--> commodityProducer goodsOwner
+
+o AccordClause[] contractClauses //English terms of the inspection the inspector will verify
+o AccordContractState contractState
+}
+
+
+enum oilGrade {
+o ClassA
+o ClassB
+o ClassC
+o ClassD
+}
+
+asset oilBarrel identified by barrelId {
+o String barrelId
+o Organization originator //Originator serves as label, do not have to point back to contract owner
+o oilGrade barrelGrade
+o AccordParty currentOwner
+}
+
+transaction assignOwner {
+//assign new owner to asset
+--> oilBarrel Oil
+--> commodityPurchaser newOwner
+}
+
+
+transaction signContract extends ContractSigned {
+  //inherit --> AccordContract contract from ContractSigned
+  //this contract update the state of the contract asset
+}

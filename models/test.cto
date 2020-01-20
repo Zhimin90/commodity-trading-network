@@ -1,0 +1,6 @@
+namespace org.test
+
+enum testEnum {
+o test1
+o test2
+}
