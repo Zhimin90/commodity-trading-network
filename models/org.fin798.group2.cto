@@ -18,115 +18,143 @@
 
 namespace org.fin798.group2
 
-import org.accordproject.cicero.contract.* from https://models.accordproject.org/cicero/contract.cto
-import org.accordproject.organization.* from https://models.accordproject.org/organization.cto
-import org.accordproject.signature.ContractSigned from https://models.accordproject.org/signature/signature.cto
-//demonstrate importing local cto file
-import org.test.*
-
 enum contractState {
-o Drafted //any one can initialize contract to be drafted
-o Active //owner of the contract can set it to active
-o Completed //contract clauses met condition
-o Signed //contract clauses met condition and signed all required participant/s
-o Void //contract state has failed and is irreversable
+ o Drafted//anyone can initialize contract to be drafted
+ o Active//owner of the contract can set it to active
+ o Completed//contract clauses met condition
+ o Signed//contract clauses met condition and signed all required participant/s
+ o Void//contract state has failed and is irreversable
 }
 
-participant commodityProducer extends AccordParty {
-//inherit unique id from AccordParty
-o Organization organizationInfo
+asset masterContract identified by contractID {
+  o String contractID
+  o contractState state
+  --> commodityProducer owner
+  --> OilLot oilLot 
+  --> tradeAgreement tradeAgreement optional
+  --> shippingTerms shippingTerms optional
+  --> billofLadingTerms billofLadingTerms optional
+  --> customsInspection customsInspection  optional
 }
-
-participant commodityPurchaser extends AccordParty {
-//inherit unique id from AccordParty
-o Organization organizationInfo
-}
-
-participant Inspector extends AccordParty {
-//inherit unique id from AccordParty
-o Organization organizationInfo
-}
-
-participant Customs extends AccordParty {
-//inherit unique id from AccordParty
-o Organization organizationInfo
-}
-
-participant trustedVendor extends AccordParty {
-//inherit unique id from AccordParty
-o Organization organizationInfo
-}
-
-
-asset shippingTermsContract extends AccordContract {
-//AccordContract inherit contract Id only. This will provide future compatible model for ERGO contract logic
---> trustedVendor[] vendors
---> commodityPurchaser Buyer
---> commodityProducer goodsOwner
-
---> oilBarrel[] inspectedGoods //assets tied to this contract
-
-o AccordClause[] contractClauses //English terms of the inspection the inspector will verify
-o AccordContractState contractState  
-}
-
-asset billOfLandingContract extends AccordContract {
-//AccordContract inherit contract Id only. This will provide future compatible model for ERGO contract logic
---> Customs customs
---> commodityProducer goodsOwner
-
---> oilBarrel[] inspectedGoods //assets tied to this contract
-
-o AccordClause[] contractClauses //English terms of the inspection the inspector will verify
-o AccordContractState contractState
-}
-
-asset inspectionContract extends AccordContract {
-//AccordContract inherit contract Id only. This will provide future compatible model for ERGO contract logic
---> Inspector inspector
---> commodityProducer goodsOwner
-
---> oilBarrel[] inspectedGoods //assets tied to this contract
-
-o AccordClause[] contractClauses //English terms of the inspection the inspector will verify
-o AccordContractState contractState
-}
-
-asset masterContract extends AccordContract {
---> shippingTermsContract shippingTerms
---> billOfLandingContract billOfLandingTerms
---> inspectionContract inspectionTerms
-
---> commodityPurchaser Buyer
---> commodityProducer goodsOwner
-
-o AccordClause[] contractClauses //English terms of the inspection the inspector will verify
-o AccordContractState contractState
-}
-
 
 enum oilGrade {
-o ClassA
-o ClassB
-o ClassC
-o ClassD
+ o ClassA
+ o ClassB
+ o ClassC
+ o ClassD
 }
 
-asset oilBarrel identified by barrelId {
-o String barrelId
-o Organization originator //Originator serves as label, do not have to point back to contract owner
-o oilGrade barrelGrade
-o AccordParty currentOwner
+asset OilLot identified by LotID {
+  o String LotID
+  o String description
+  o Double quantity
+  o oilGrade barrelGrade
+  --> commodityProducer owner
 }
 
-transaction assignOwner {
-//assign new owner to asset
---> oilBarrel Oil
---> commodityPurchaser newOwner
+asset tradeAgreement identified by agreementID {
+  o String agreementID
+  o String terms
+  o contractState state
+  --> commodityProducer seller
+  --> commodityPurchaser buyer
+}
+
+asset shippingTerms identified by shippingID {
+  o String shippingID
+  o String shippingDetails
+  o contractState state
+  --> producerCountryOps owner
+  --> commodityPurchaser validator
+  --> trustedVendor[] vendors
+  --> OilLot OilLot
+}
+
+asset billofLadingTerms identified by OutBoundCustomsID {
+  o String OutBoundCustomsID
+  o String ladingDetails
+  o contractState state
+  --> commodityProducer owner
+  --> commodityPurchaser validator
+  --> OilLot OilLot
+}
+
+asset customsInspection identified by inboundCustomsID {
+  o String inboundCustomsID
+  o String landingDetails
+  o contractState state
+  --> commodityProducer owner
+  --> commodityPurchaser validator
+  --> OilLot OilLot
+}
+
+participant commodityProducer identified by organizationid {
+  o String organizationid 
+  o String companyName
+}
+
+participant producerCountryOps identified by organizationid {
+ o String organizationid 
+ o String organizationInfo
+}
+
+participant commodityPurchaser identified by organizationid {
+  o String organizationid 
+  o String companyName
+}
+
+participant trustedVendor identified by organizationid {
+ o String organizationid 
+ o String organizationInfo
+}
+
+participant financialInstitution identified by organizationid {
+ o String organizationid 
+ o String organizationInfo
+}
+
+abstract transaction ownershipTransfer {
+ --> OilLot commodity
+ --> commodityPurchaser newOwner
+}
+
+transaction termsAgreement {
+//This transaction updates the termsAgreement contract from active to completed
+//Company Alpha is represents customs and will update contract state.
+//Company Alpha signs 
+ --> masterContract contractReference
+}
+
+transaction shippingAgreement extends ownershipTransfer {
+//This transaction updates the shippingAgreement contract from active to completed
+//Company Alpha is represents customs and will update contract state.
+//Company Alpha signs   
+ --> shippingTerms contractReference
+}
+
+transaction outboundCustoms extends ownershipTransfer {
+//This transaction updates the billofLadingTerms contract from active to completed
+//Company Alpha is represents customs and will update contract state.
+//Company Alpha signs 
+ --> billofLadingTerms contractReference
+}
+
+transaction inboundCustoms extends ownershipTransfer {
+//This transaction updates the customsInspection contract from active to completed
+//Company Alpha is represents customs and will update contract state.
+//Company Alpha signs
+ --> customsInspection contractReference
+}
+
+event TradeNotification {
+//This event is raised when a master contract state has been updated from active to completed
+ --> masterContract reference
+ --> financialInstitution notificationRecipient
 }
 
 
-transaction signContract extends ContractSigned {
-  //inherit --> AccordContract contract from ContractSigned
-  //this contract update the state of the contract asset
+/**
+ * JUST FOR INITIALIZING A DEMO
+ */
+transaction SetupDemo {
 }

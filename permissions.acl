@@ -11,6 +11,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+ * Access control rules for mynetwork
+ */
+rule Default {
+    description: "Allow all participants access to all resources"
+    participant: "ANY"
+    operation: ALL
+    resource: "org.fin798.group2.*"
+    action: ALLOW
+}
+
+rule SystemACL {
+    description:  "System ACL to permit all access"
+    participant: "org.hyperledger.composer.system.Participant"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.**"
+    action: ALLOW
+}
 
 rule NetworkAdminUser {
     description: "Grant business network administrators full access to user resources"
