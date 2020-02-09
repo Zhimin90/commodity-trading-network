@@ -3,7 +3,7 @@
     "composer": "^0.20.7"
   },
   "name": "commodity-trading-network",
-  "version": "0.0.1",
+  "version": "0.3.1",
   "description": "A network to settle trades on Hyperledger",
   "scripts": {
     "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/commodity-trading-network.bna",
