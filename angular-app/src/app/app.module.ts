@@ -39,6 +39,7 @@ import { shippingAgreementComponent } from './shippingAgreement/shippingAgreemen
 import { outboundCustomsComponent } from './outboundCustoms/outboundCustoms.component';
 import { inboundCustomsComponent } from './inboundCustoms/inboundCustoms.component';
 import { SetupDemoComponent } from './SetupDemo/SetupDemo.component';
+import { ContractBrowserComponent } from './contract-browser/contract-browser.component';
 
   @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { SetupDemoComponent } from './SetupDemo/SetupDemo.component';
     shippingAgreementComponent,
     outboundCustomsComponent,
     inboundCustomsComponent,
-    SetupDemoComponent
+    SetupDemoComponent,
+    ContractBrowserComponent
   ],
   imports: [
     BrowserModule,
