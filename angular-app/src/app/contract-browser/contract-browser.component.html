@@ -1,3 +1,162 @@
 <p>
   contract-browser works!
 </p>
+<form [formGroup]="myForm">
+	<div class="modal-body">
+
+
+
+
+
+				<div class="form-group text-left">
+
+						<p> {{state}} </p>
+
+					<label for="contractID">contractID</label>
+
+						<input formControlName="contractID" type="text" class="form-control">
+
+				</div>
+
+
+
+
+				<label for="state">state</label>
+				<div class="checkbox">
+
+						<label>
+							<input
+
+									formControlName="state"
+
+								name="state"
+								value="Drafted"
+								type="radio"
+
+							/>
+							Drafted
+						</label>
+
+						<label>
+							<input
+
+									formControlName="state"
+
+								name="state"
+								value="Active"
+								type="radio"
+
+							/>
+							Active
+						</label>
+
+						<label>
+							<input
+
+									formControlName="state"
+
+								name="state"
+								value="Completed"
+								type="radio"
+
+							/>
+							Completed
+						</label>
+
+						<label>
+							<input
+
+									formControlName="state"
+
+								name="state"
+								value="Signed"
+								type="radio"
+
+							/>
+							Signed
+						</label>
+
+						<label>
+							<input
+
+									formControlName="state"
+
+								name="state"
+								value="Void"
+								type="radio"
+
+							/>
+							Void
+						</label>
+
+				</div>
+
+
+
+
+				<div class="form-group text-left">
+					<label for="owner">owner</label>
+
+							<textarea formControlName="owner" class="form-control" rows="3"></textarea>
+
+				</div>
+
+
+
+
+				<div class="form-group text-left">
+					<label for="oilLot">oilLot</label>
+
+							<textarea formControlName="oilLot" class="form-control" rows="3"></textarea>
+
+				</div>
+
+
+
+
+				<div class="form-group text-left">
+					<label for="tradeAgreement">tradeAgreement</label>
+
+							<textarea formControlName="tradeAgreement" class="form-control" rows="3"></textarea>
+
+				</div>
+
+
+
+
+				<div class="form-group text-left">
+					<label for="shippingTerms">shippingTerms</label>
+
+							<textarea formControlName="shippingTerms" class="form-control" rows="3"></textarea>
+
+				</div>
+
+
+
+
+				<div class="form-group text-left">
+					<label for="billofLadingTerms">billofLadingTerms</label>
+
+							<textarea formControlName="billofLadingTerms" class="form-control" rows="3"></textarea>
+
+				</div>
+
+
+
+
+				<div class="form-group text-left">
+					<label for="customsInspection">customsInspection</label>
+
+							<textarea formControlName="customsInspection" class="form-control" rows="3"></textarea>
+
+				</div>
+
+
+
+	</div>
+	<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		<button (click)="addAsset(myForm);" type="submit" class="btn btn-success" data-dismiss="modal">Confirm</button>
+
+	</div>
+</form>

@@ -102,7 +102,7 @@ export class outboundCustomsComponent implements OnInit {
 
   addTransaction(form: any): Promise<any> {
     this.Transaction = {
-      $class: 'org.example.trading.outboundCustoms',
+      $class: 'org.fin798.group2.outboundCustoms',
       'contractReference': this.contractReference.value,
       'commodity': this.commodity.value,
       'newOwner': this.newOwner.value,
@@ -141,7 +141,7 @@ export class outboundCustomsComponent implements OnInit {
 
   updateTransaction(form: any): Promise<any> {
     this.Transaction = {
-      $class: 'org.example.trading.outboundCustoms',
+      $class: 'org.fin798.group2.outboundCustoms',
       'contractReference': this.contractReference.value,
       'commodity': this.commodity.value,
       'newOwner': this.newOwner.value,

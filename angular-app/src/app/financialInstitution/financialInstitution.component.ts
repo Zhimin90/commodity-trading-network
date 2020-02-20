@@ -95,7 +95,7 @@ export class financialInstitutionComponent implements OnInit {
 
   addParticipant(form: any): Promise<any> {
     this.participant = {
-      $class: 'org.example.trading.financialInstitution',
+      $class: 'org.fin798.group2.financialInstitution',
       'organizationid': this.organizationid.value,
       'organizationInfo': this.organizationInfo.value
     };
@@ -113,7 +113,7 @@ export class financialInstitutionComponent implements OnInit {
         'organizationid': null,
         'organizationInfo': null
       });
-      this.loadAll(); 
+      this.loadAll();
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -127,7 +127,7 @@ export class financialInstitutionComponent implements OnInit {
 
    updateParticipant(form: any): Promise<any> {
     this.participant = {
-      $class: 'org.example.trading.financialInstitution',
+      $class: 'org.fin798.group2.financialInstitution',
       'organizationInfo': this.organizationInfo.value
     };
 

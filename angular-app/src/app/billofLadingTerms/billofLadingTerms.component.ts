@@ -103,7 +103,7 @@ export class billofLadingTermsComponent implements OnInit {
 
   addAsset(form: any): Promise<any> {
     this.asset = {
-      $class: 'org.example.trading.billofLadingTerms',
+      $class: 'org.fin798.group2.billofLadingTerms',
       'OutBoundCustomsID': this.OutBoundCustomsID.value,
       'ladingDetails': this.ladingDetails.value,
       'state': this.state.value,
@@ -147,7 +147,7 @@ export class billofLadingTermsComponent implements OnInit {
 
   updateAsset(form: any): Promise<any> {
     this.asset = {
-      $class: 'org.example.trading.billofLadingTerms',
+      $class: 'org.fin798.group2.billofLadingTerms',
       'ladingDetails': this.ladingDetails.value,
       'state': this.state.value,
       'owner': this.owner.value,

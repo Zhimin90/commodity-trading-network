@@ -15,11 +15,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { DataService } from './data.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+
+
 
 import { masterContractComponent } from './masterContract/masterContract.component';
 import { OilLotComponent } from './OilLot/OilLot.component';
@@ -40,6 +43,7 @@ import { outboundCustomsComponent } from './outboundCustoms/outboundCustoms.comp
 import { inboundCustomsComponent } from './inboundCustoms/inboundCustoms.component';
 import { SetupDemoComponent } from './SetupDemo/SetupDemo.component';
 import { ContractBrowserComponent } from './contract-browser/contract-browser.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
   @NgModule({
   declarations: [
@@ -67,8 +71,10 @@ import { ContractBrowserComponent } from './contract-browser/contract-browser.co
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
-    AppRoutingModule
+		HttpModule,
+		HttpClientModule,
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [
     DataService

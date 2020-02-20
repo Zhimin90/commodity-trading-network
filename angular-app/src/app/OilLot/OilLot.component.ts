@@ -101,7 +101,7 @@ export class OilLotComponent implements OnInit {
 
   addAsset(form: any): Promise<any> {
     this.asset = {
-      $class: 'org.example.trading.OilLot',
+      $class: 'org.fin798.group2.OilLot',
       'LotID': this.LotID.value,
       'description': this.description.value,
       'quantity': this.quantity.value,
@@ -142,7 +142,7 @@ export class OilLotComponent implements OnInit {
 
   updateAsset(form: any): Promise<any> {
     this.asset = {
-      $class: 'org.example.trading.OilLot',
+      $class: 'org.fin798.group2.OilLot',
       'description': this.description.value,
       'quantity': this.quantity.value,
       'barrelGrade': this.barrelGrade.value,

@@ -105,7 +105,7 @@ export class shippingTermsComponent implements OnInit {
 
   addAsset(form: any): Promise<any> {
     this.asset = {
-      $class: 'org.example.trading.shippingTerms',
+      $class: 'org.fin798.group2.shippingTerms',
       'shippingID': this.shippingID.value,
       'shippingDetails': this.shippingDetails.value,
       'state': this.state.value,
@@ -152,7 +152,7 @@ export class shippingTermsComponent implements OnInit {
 
   updateAsset(form: any): Promise<any> {
     this.asset = {
-      $class: 'org.example.trading.shippingTerms',
+      $class: 'org.fin798.group2.shippingTerms',
       'shippingDetails': this.shippingDetails.value,
       'state': this.state.value,
       'owner': this.owner.value,

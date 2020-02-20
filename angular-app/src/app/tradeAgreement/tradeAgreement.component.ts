@@ -101,7 +101,7 @@ export class tradeAgreementComponent implements OnInit {
 
   addAsset(form: any): Promise<any> {
     this.asset = {
-      $class: 'org.example.trading.tradeAgreement',
+      $class: 'org.fin798.group2.tradeAgreement',
       'agreementID': this.agreementID.value,
       'terms': this.terms.value,
       'state': this.state.value,
@@ -142,7 +142,7 @@ export class tradeAgreementComponent implements OnInit {
 
   updateAsset(form: any): Promise<any> {
     this.asset = {
-      $class: 'org.example.trading.tradeAgreement',
+      $class: 'org.fin798.group2.tradeAgreement',
       'terms': this.terms.value,
       'state': this.state.value,
       'seller': this.seller.value,

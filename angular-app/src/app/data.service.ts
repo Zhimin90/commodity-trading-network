@@ -14,6 +14,7 @@
 
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -24,20 +25,26 @@ export class DataService<Type> {
     private actionUrl: string;
     private headers: Headers;
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
         this.actionUrl = '/api/';
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');
         this.headers.append('Accept', 'application/json');
-    }
+		}
 
+		public getAll(ns: string) {
+			console.log('GetAll ' + ns + ' to ' + this.actionUrl + ns);
+			return this.http.get(`${this.actionUrl}${ns}`);
+		}
+
+/*
     public getAll(ns: string): Observable<Type[]> {
         console.log('GetAll ' + ns + ' to ' + this.actionUrl + ns);
         return this.http.get(`${this.actionUrl}${ns}`)
           .map(this.extractData)
           .catch(this.handleError);
     }
-
+*/
     public getSingle(ns: string, id: string): Observable<Type> {
         console.log('GetSingle ' + ns);
 
@@ -83,8 +90,8 @@ export class DataService<Type> {
         return Observable.throw(errMsg);
     }
 
+
     private extractData(res: Response): any {
         return res.json();
     }
-
 }

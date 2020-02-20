@@ -95,7 +95,7 @@ export class producerCountryOpsComponent implements OnInit {
 
   addParticipant(form: any): Promise<any> {
     this.participant = {
-      $class: 'org.example.trading.producerCountryOps',
+      $class: 'org.fin798.group2.producerCountryOps',
       'organizationid': this.organizationid.value,
       'organizationInfo': this.organizationInfo.value
     };
@@ -113,7 +113,7 @@ export class producerCountryOpsComponent implements OnInit {
         'organizationid': null,
         'organizationInfo': null
       });
-      this.loadAll(); 
+      this.loadAll();
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -127,7 +127,7 @@ export class producerCountryOpsComponent implements OnInit {
 
    updateParticipant(form: any): Promise<any> {
     this.participant = {
-      $class: 'org.example.trading.producerCountryOps',
+      $class: 'org.fin798.group2.producerCountryOps',
       'organizationInfo': this.organizationInfo.value
     };
 

@@ -95,7 +95,7 @@ export class trustedVendorComponent implements OnInit {
 
   addParticipant(form: any): Promise<any> {
     this.participant = {
-      $class: 'org.example.trading.trustedVendor',
+      $class: 'org.fin798.group2.trustedVendor',
       'organizationid': this.organizationid.value,
       'organizationInfo': this.organizationInfo.value
     };
@@ -113,7 +113,7 @@ export class trustedVendorComponent implements OnInit {
         'organizationid': null,
         'organizationInfo': null
       });
-      this.loadAll(); 
+      this.loadAll();
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -127,7 +127,7 @@ export class trustedVendorComponent implements OnInit {
 
    updateParticipant(form: any): Promise<any> {
     this.participant = {
-      $class: 'org.example.trading.trustedVendor',
+      $class: 'org.fin798.group2.trustedVendor',
       'organizationInfo': this.organizationInfo.value
     };
 

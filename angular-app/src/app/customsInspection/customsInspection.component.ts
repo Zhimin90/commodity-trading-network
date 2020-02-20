@@ -103,7 +103,7 @@ export class customsInspectionComponent implements OnInit {
 
   addAsset(form: any): Promise<any> {
     this.asset = {
-      $class: 'org.example.trading.customsInspection',
+      $class: 'org.fin798.group2.customsInspection',
       'inboundCustomsID': this.inboundCustomsID.value,
       'landingDetails': this.landingDetails.value,
       'state': this.state.value,
@@ -147,7 +147,7 @@ export class customsInspectionComponent implements OnInit {
 
   updateAsset(form: any): Promise<any> {
     this.asset = {
-      $class: 'org.example.trading.customsInspection',
+      $class: 'org.fin798.group2.customsInspection',
       'landingDetails': this.landingDetails.value,
       'state': this.state.value,
       'owner': this.owner.value,

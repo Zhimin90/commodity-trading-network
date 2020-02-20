@@ -98,7 +98,7 @@ export class termsAgreementComponent implements OnInit {
 
   addTransaction(form: any): Promise<any> {
     this.Transaction = {
-      $class: 'org.example.trading.termsAgreement',
+      $class: 'org.fin798.group2.termsAgreement',
       'contractReference': this.contractReference.value,
       'transactionId': this.transactionId.value,
       'timestamp': this.timestamp.value
@@ -131,7 +131,7 @@ export class termsAgreementComponent implements OnInit {
 
   updateTransaction(form: any): Promise<any> {
     this.Transaction = {
-      $class: 'org.example.trading.termsAgreement',
+      $class: 'org.fin798.group2.termsAgreement',
       'contractReference': this.contractReference.value,
       'timestamp': this.timestamp.value
     };

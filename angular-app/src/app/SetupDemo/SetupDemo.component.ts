@@ -96,7 +96,7 @@ export class SetupDemoComponent implements OnInit {
 
   addTransaction(form: any): Promise<any> {
     this.Transaction = {
-      $class: 'org.example.trading.SetupDemo',
+      $class: 'org.fin798.group2.SetupDemo',
       'transactionId': this.transactionId.value,
       'timestamp': this.timestamp.value
     };
@@ -126,7 +126,7 @@ export class SetupDemoComponent implements OnInit {
 
   updateTransaction(form: any): Promise<any> {
     this.Transaction = {
-      $class: 'org.example.trading.SetupDemo',
+      $class: 'org.fin798.group2.SetupDemo',
       'timestamp': this.timestamp.value
     };
 

@@ -15,19 +15,21 @@
 import { Injectable } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
-import { masterContract } from '../org.example.trading';
+import { masterContract }  from '../org.example.trading';
 import 'rxjs/Rx';
 
 // Can be injected into a constructor contractbrowserService
 @Injectable()
 export class contractbrowserService {
 
-  private NAMESPACE = 'masterContract';
+	private NAMESPACE = 'masterContract';
+	//private NAMESPACE = "org.fin798.group2.masterContract"
 
   constructor(private dataService: DataService<masterContract>) {
   };
 
   public getAll(): Observable<masterContract[]> {
+		//console.log("this is masterContract Namespace: ", masterContract)
     return this.dataService.getAll(this.NAMESPACE);
   }
 

@@ -22,7 +22,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class masterContractService {
 
-  private NAMESPACE = 'masterContract';
+  public NAMESPACE = 'masterContract';
 
   constructor(private dataService: DataService<masterContract>) {
   };

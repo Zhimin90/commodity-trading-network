@@ -95,7 +95,7 @@ export class commodityProducerComponent implements OnInit {
 
   addParticipant(form: any): Promise<any> {
     this.participant = {
-      $class: 'org.example.trading.commodityProducer',
+      $class: 'org.fin798.group2.commodityProducer',
       'organizationid': this.organizationid.value,
       'companyName': this.companyName.value
     };
@@ -113,7 +113,7 @@ export class commodityProducerComponent implements OnInit {
         'organizationid': null,
         'companyName': null
       });
-      this.loadAll(); 
+      this.loadAll();
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -127,7 +127,7 @@ export class commodityProducerComponent implements OnInit {
 
    updateParticipant(form: any): Promise<any> {
     this.participant = {
-      $class: 'org.example.trading.commodityProducer',
+      $class: 'org.fin798.group2.commodityProducer',
       'companyName': this.companyName.value
     };
 
