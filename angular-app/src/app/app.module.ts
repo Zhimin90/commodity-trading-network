@@ -42,8 +42,11 @@ import { shippingAgreementComponent } from './shippingAgreement/shippingAgreemen
 import { outboundCustomsComponent } from './outboundCustoms/outboundCustoms.component';
 import { inboundCustomsComponent } from './inboundCustoms/inboundCustoms.component';
 import { SetupDemoComponent } from './SetupDemo/SetupDemo.component';
+
 import { ContractBrowserComponent } from './contract-browser/contract-browser.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider';
+import { MaterialDesignModule } from './material-design/material-design.module';
 
   @NgModule({
   declarations: [
@@ -74,7 +77,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		HttpModule,
 		HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+		BrowserAnimationsModule,
+		MatSliderModule,
+		MaterialDesignModule
   ],
   providers: [
     DataService

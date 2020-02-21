@@ -32,7 +32,7 @@ export class DataService<Type> {
         this.headers.append('Accept', 'application/json');
 		}
 
-		public getAll(ns: string) {
+		public getAll(ns: string): Observable<Type[]> {
 			console.log('GetAll ' + ns + ' to ' + this.actionUrl + ns);
 			return this.http.get(`${this.actionUrl}${ns}`);
 		}

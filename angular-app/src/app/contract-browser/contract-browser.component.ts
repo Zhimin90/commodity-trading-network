@@ -6,17 +6,21 @@ import 'rxjs/add/operator/toPromise';
 @Component({
   selector: 'app-contract-browser',
   templateUrl: './contract-browser.component.html',
-  styleUrls: ['./contract-browser.component.css'],
+	styleUrls: ['./contract-browser.component.css'],
   providers: [contractbrowserService]
 })
 export class ContractBrowserComponent implements OnInit {
 
 	myForm: FormGroup;
 
-  private allAssets;
-  private asset;
-  private currentId;
-  private errorMessage;
+  public allAssets;
+  public asset;
+  public currentId;
+	public errorMessage;
+
+	isLinear = false;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
 
   contractID = new FormControl('', Validators.required);
   state = new FormControl('', Validators.required);
@@ -27,7 +31,7 @@ export class ContractBrowserComponent implements OnInit {
   billofLadingTerms = new FormControl('', Validators.required);
   customsInspection = new FormControl('', Validators.required);
 
-  constructor(public contractbrowserService: contractbrowserService, fb: FormBuilder) {
+  constructor(public contractbrowserService: contractbrowserService, fb: FormBuilder, private _formBuilder: FormBuilder) {
     this.myForm = fb.group({
       contractID: this.contractID,
       state: this.state,
@@ -37,6 +41,13 @@ export class ContractBrowserComponent implements OnInit {
       shippingTerms: this.shippingTerms,
       billofLadingTerms: this.billofLadingTerms,
       customsInspection: this.customsInspection
+		});
+
+		this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
     });
   };
 
