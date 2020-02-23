@@ -1,205 +1,29 @@
-<p>
-  contract-browser works!
-</p>
-<button mat-raised-button color="primary">Submit</button>
-<mat-checkbox>Terms & Conditions</mat-checkbox>
-<mat-slider min="1" max="100" step="1" value="1"></mat-slider>
 
-<mat-horizontal-stepper [linear]="isLinear" #stepper>
-		<mat-step [stepControl]="firstFormGroup">
-			<form [formGroup]="firstFormGroup">
-				<ng-template matStepLabel>Fill out your name</ng-template>
-				<mat-form-field>
-					<mat-label>Name</mat-label>
-					<input matInput placeholder={{allAssets[0].state}} formControlName="firstCtrl" required>
-				</mat-form-field>
-				<div>
-					<button mat-button matStepperNext>Next</button>
-				</div>
-			</form>
-		</mat-step>
-		<mat-step [stepControl]="secondFormGroup">
-			<form [formGroup]="secondFormGroup">
-				<ng-template matStepLabel>Fill out your address</ng-template>
-				<mat-form-field>
-					<mat-label>Address</mat-label>
-					<input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-								 required>
-				</mat-form-field>
-				<div>
-					<button mat-button matStepperPrevious>Back</button>
-					<button mat-button matStepperNext>Next</button>
-				</div>
-			</form>
-		</mat-step>
-		<mat-step>
-			<ng-template matStepLabel>Done</ng-template>
-			<p>You are now done.</p>
-			<div>
-				<button mat-button matStepperPrevious>Back</button>
-				<button mat-button (click)="stepper.reset()">Reset</button>
-			</div>
-		</mat-step>
-	</mat-horizontal-stepper>
-
-<form [formGroup]="myForm">
-	<div class="modal-body">
-
-
-
-
-
-				<div class="form-group text-left">
-
-						<p> test </p>
-
-
-
-					<label for="contractID">contractID</label>
-
-						<input formControlName="contractID" type="text" class="form-control">
-
-				</div>
-
-
-
-
-				<label for="state">state</label>
-				<div class="checkbox">
-
-						<label>
-							<input
-
-									formControlName="state"
-
-								name="state"
-								value="Drafted"
-								type="radio"
-
-							/>
-							Drafted
-						</label>
-
-						<label>
-							<input
-
-									formControlName="state"
-
-								name="state"
-								value="Active"
-								type="radio"
-
-							/>
-							Active
-						</label>
-
-						<label>
-							<input
-
-									formControlName="state"
-
-								name="state"
-								value="Completed"
-								type="radio"
-
-							/>
-							Completed
-						</label>
-
-						<label>
-							<input
-
-									formControlName="state"
-
-								name="state"
-								value="Signed"
-								type="radio"
-
-							/>
-							Signed
-						</label>
-
-						<label>
-							<input
-
-									formControlName="state"
-
-								name="state"
-								value="Void"
-								type="radio"
-
-							/>
-							Void
-						</label>
-
-				</div>
-
-
-
-
-				<div class="form-group text-left">
-					<label for="owner">owner</label>
-
-							<textarea formControlName="owner" class="form-control" rows="3"></textarea>
-
-				</div>
-
-
-
-
-				<div class="form-group text-left">
-					<label for="oilLot">oilLot</label>
-
-							<textarea formControlName="oilLot" class="form-control" rows="3"></textarea>
-
-				</div>
-
-
-
-
-				<div class="form-group text-left">
-					<label for="tradeAgreement">tradeAgreement</label>
-
-							<textarea formControlName="tradeAgreement" class="form-control" rows="3"></textarea>
-
-				</div>
-
-
-
-
-				<div class="form-group text-left">
-					<label for="shippingTerms">shippingTerms</label>
-
-							<textarea formControlName="shippingTerms" class="form-control" rows="3"></textarea>
-
-				</div>
-
-
-
-
-				<div class="form-group text-left">
-					<label for="billofLadingTerms">billofLadingTerms</label>
-
-							<textarea formControlName="billofLadingTerms" class="form-control" rows="3"></textarea>
-
-				</div>
-
-
-
-
-				<div class="form-group text-left">
-					<label for="customsInspection">customsInspection</label>
-
-							<textarea formControlName="customsInspection" class="form-control" rows="3"></textarea>
-
-				</div>
-
-
-
-	</div>
-	<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-		<button (click)="addAsset(myForm);" type="submit" class="btn btn-success" data-dismiss="modal">Confirm</button>
-
-	</div>
-</form>
+<div>
+<mat-list-item *ngFor="let asset of allAssets">
+	<mat-card class="example-card">
+
+		<body>
+			<h1>Contract ID: {{asset.contractID}}</h1>
+			<h2>Contract State: {{asset.state}}</h2>
+			<p>owner: {{asset.owner}}</p>
+			<p>oil lot: {{asset.oilLot}}</p>
+			<p>trade agreement: {{asset.tradeAgreement}}</p>
+		</body>
+
+		<mat-horizontal-stepper [linear]="isLinear" #stepper>
+				<mat-step [stepControl]="firstFormGroup">
+					<ng-template matStepLabel>Contract is Active</ng-template>
+				</mat-step>
+				<mat-step [stepControl]="secondFormGroup">
+					<ng-template matStepLabel>Lot Shipped</ng-template>
+				</mat-step>
+				<mat-step>
+					<ng-template matStepLabel>Lot in Customs</ng-template>
+					<p>You are now done.</p>
+				</mat-step>
+			</mat-horizontal-stepper>
+
+	</mat-card>
+</mat-list-item>
+</div>
