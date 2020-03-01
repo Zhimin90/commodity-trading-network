@@ -27,10 +27,10 @@ export class masterContractComponent implements OnInit {
 
   myForm: FormGroup;
 
-  private allAssets;
+  public allAssets;
   private asset;
   private currentId;
-  private errorMessage;
+  public errorMessage;
 
   contractID = new FormControl('', Validators.required);
   state = new FormControl('', Validators.required);

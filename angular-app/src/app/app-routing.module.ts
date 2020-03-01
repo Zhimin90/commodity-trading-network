@@ -37,6 +37,7 @@ import { inboundCustomsComponent } from './inboundCustoms/inboundCustoms.compone
 import { SetupDemoComponent } from './SetupDemo/SetupDemo.component';
 
 import {ContractBrowserComponent} from './contract-browser/contract-browser.component';
+import {ContractTreeComponent} from './contract-tree/contract-tree.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -56,7 +57,8 @@ const routes: Routes = [
   { path: 'outboundCustoms', component: outboundCustomsComponent },
   { path: 'inboundCustoms', component: inboundCustomsComponent },
   { path: 'SetupDemo', component: SetupDemoComponent },
-  { path: 'contractBrowser', component: ContractBrowserComponent },
+	{ path: 'contractBrowser', component: ContractBrowserComponent },
+	{ path: 'contractTree', component: ContractTreeComponent },
   { path: '**', redirectTo: '' }
 ];
 

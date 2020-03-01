@@ -47,6 +47,7 @@ import { ContractBrowserComponent } from './contract-browser/contract-browser.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MaterialDesignModule } from './material-design/material-design.module';
+import { ContractTreeComponent } from './contract-tree/contract-tree.component';
 
   @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { MaterialDesignModule } from './material-design/material-design.module';
     outboundCustomsComponent,
     inboundCustomsComponent,
     SetupDemoComponent,
-    ContractBrowserComponent
+    ContractBrowserComponent,
+    ContractTreeComponent
   ],
   imports: [
     BrowserModule,

@@ -27,10 +27,10 @@ export class tradeAgreementComponent implements OnInit {
 
   myForm: FormGroup;
 
-  private allAssets;
+  public allAssets;
   private asset;
   private currentId;
-  private errorMessage;
+  public errorMessage;
 
   agreementID = new FormControl('', Validators.required);
   terms = new FormControl('', Validators.required);

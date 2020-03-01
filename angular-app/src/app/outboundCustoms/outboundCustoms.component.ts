@@ -27,10 +27,10 @@ export class outboundCustomsComponent implements OnInit {
 
   myForm: FormGroup;
 
-  private allTransactions;
+  public allTransactions;
   private Transaction;
   private currentId;
-  private errorMessage;
+  public errorMessage;
 
   contractReference = new FormControl('', Validators.required);
   commodity = new FormControl('', Validators.required);

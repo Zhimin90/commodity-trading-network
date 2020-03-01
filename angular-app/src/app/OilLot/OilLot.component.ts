@@ -27,10 +27,10 @@ export class OilLotComponent implements OnInit {
 
   myForm: FormGroup;
 
-  private allAssets;
+  public allAssets;
   private asset;
   private currentId;
-  private errorMessage;
+  public errorMessage;
 
   LotID = new FormControl('', Validators.required);
   description = new FormControl('', Validators.required);

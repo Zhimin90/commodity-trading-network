@@ -7,6 +7,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatStepperModule } from '@angular/material/stepper';
 import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
+import {MatTreeModule} from '@angular/material/tree';
 //import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
@@ -18,7 +19,8 @@ import {MatListModule} from '@angular/material/list';
 		MatButtonModule,
 		MatStepperModule,
 		MatCardModule,
-		MatListModule
+		MatListModule,
+		MatTreeModule
 		//MatFormFieldModule
   ],
   exports: [
@@ -27,7 +29,8 @@ import {MatListModule} from '@angular/material/list';
 		MatButtonModule,
 		MatStepperModule,
 		MatCardModule,
-		MatListModule
+		MatListModule,
+		MatTreeModule
 		//MatFormFieldModule
   ]
 })

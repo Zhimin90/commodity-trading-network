@@ -15,7 +15,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+//import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -33,8 +34,9 @@ export class DataService<Type> {
 		}
 
 		public getAll(ns: string): Observable<Type[]> {
+			const url = `${this.actionUrl}${ns}`;
 			console.log('GetAll ' + ns + ' to ' + this.actionUrl + ns);
-			return this.http.get(`${this.actionUrl}${ns}`);
+			return this.http.get<Type[]>(url);
 		}
 
 /*
@@ -48,9 +50,7 @@ export class DataService<Type> {
     public getSingle(ns: string, id: string): Observable<Type> {
         console.log('GetSingle ' + ns);
 
-        return this.http.get(this.actionUrl + ns + '/' + id + this.resolveSuffix)
-          .map(this.extractData)
-          .catch(this.handleError);
+        return this.http.get<Type>(this.actionUrl + ns + '/' + id + this.resolveSuffix);
     }
 
     public add(ns: string, asset: Type): Observable<Type> {
@@ -58,9 +58,7 @@ export class DataService<Type> {
         console.log('Add ' + ns);
         console.log('asset', asset);
 
-        return this.http.post(this.actionUrl + ns, asset)
-          .map(this.extractData)
-          .catch(this.handleError);
+        return this.http.post<Type>(this.actionUrl + ns, asset);
     }
 
     public update(ns: string, id: string, itemToUpdate: Type): Observable<Type> {
@@ -68,17 +66,13 @@ export class DataService<Type> {
         console.log('what is the id?', id);
         console.log('what is the updated item?', itemToUpdate);
         console.log('what is the updated item?', JSON.stringify(itemToUpdate));
-        return this.http.put(`${this.actionUrl}${ns}/${id}`, itemToUpdate)
-          .map(this.extractData)
-          .catch(this.handleError);
+        return this.http.put<Type>(`${this.actionUrl}${ns}/${id}`, itemToUpdate);
     }
 
     public delete(ns: string, id: string): Observable<Type> {
         console.log('Delete ' + ns);
 
-        return this.http.delete(this.actionUrl + ns + '/' + id)
-          .map(this.extractData)
-          .catch(this.handleError);
+        return this.http.delete<Type>(this.actionUrl + ns + '/' + id);
     }
 
     private handleError(error: any): Observable<string> {

@@ -27,10 +27,10 @@ export class SetupDemoComponent implements OnInit {
 
   myForm: FormGroup;
 
-  private allTransactions;
+  public allTransactions;
   private Transaction;
   private currentId;
-  private errorMessage;
+  public errorMessage;
 
   transactionId = new FormControl('', Validators.required);
   timestamp = new FormControl('', Validators.required);

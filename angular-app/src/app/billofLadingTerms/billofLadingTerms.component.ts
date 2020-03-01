@@ -27,10 +27,10 @@ export class billofLadingTermsComponent implements OnInit {
 
   myForm: FormGroup;
 
-  private allAssets;
+  public allAssets;
   private asset;
   private currentId;
-  private errorMessage;
+  public errorMessage;
 
   OutBoundCustomsID = new FormControl('', Validators.required);
   ladingDetails = new FormControl('', Validators.required);

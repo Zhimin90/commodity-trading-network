@@ -27,10 +27,10 @@ export class shippingTermsComponent implements OnInit {
 
   myForm: FormGroup;
 
-  private allAssets;
+  public allAssets;
   private asset;
   private currentId;
-  private errorMessage;
+  public errorMessage;
 
   shippingID = new FormControl('', Validators.required);
   shippingDetails = new FormControl('', Validators.required);

@@ -27,10 +27,10 @@ export class financialInstitutionComponent implements OnInit {
 
   myForm: FormGroup;
 
-  private allParticipants;
+  public allParticipants;
   private participant;
   private currentId;
-  private errorMessage;
+  public errorMessage;
 
   organizationid = new FormControl('', Validators.required);
   organizationInfo = new FormControl('', Validators.required);

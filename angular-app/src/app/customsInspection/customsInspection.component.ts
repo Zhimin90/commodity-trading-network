@@ -27,10 +27,10 @@ export class customsInspectionComponent implements OnInit {
 
   myForm: FormGroup;
 
-  private allAssets;
+  public allAssets;
   private asset;
   private currentId;
-  private errorMessage;
+  public errorMessage;
 
   inboundCustomsID = new FormControl('', Validators.required);
   landingDetails = new FormControl('', Validators.required);
