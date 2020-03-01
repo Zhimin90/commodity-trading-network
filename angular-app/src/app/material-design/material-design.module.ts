@@ -8,6 +8,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 import {MatTreeModule} from '@angular/material/tree';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatIconModule} from '@angular/material/icon';
 //import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
@@ -20,7 +22,9 @@ import {MatTreeModule} from '@angular/material/tree';
 		MatStepperModule,
 		MatCardModule,
 		MatListModule,
-		MatTreeModule
+		MatTreeModule,
+		MatProgressBarModule,
+		MatIconModule
 		//MatFormFieldModule
   ],
   exports: [
@@ -30,7 +34,9 @@ import {MatTreeModule} from '@angular/material/tree';
 		MatStepperModule,
 		MatCardModule,
 		MatListModule,
-		MatTreeModule
+		MatTreeModule,
+		MatProgressBarModule,
+		MatIconModule
 		//MatFormFieldModule
   ]
 })
