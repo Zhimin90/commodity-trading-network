@@ -298,6 +298,8 @@ export class masterContractComponent implements OnInit {
       'billofLadingTerms': null,
       'customsInspection': null
       });
-  }
+	}
+
+
 
 }

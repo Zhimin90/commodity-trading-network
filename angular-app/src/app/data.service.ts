@@ -39,6 +39,15 @@ export class DataService<Type> {
 			return this.http.get<Type[]>(url);
 		}
 
+		public getQuery(querytype: string, id: string): Observable<Type[]> {
+			//querytype = 'selectTradeAgreement'
+			const url = `${this.actionUrl}`+"queries/"+`${querytype}`+'?agreementID='+`${id}`;
+			console.log(url)
+			const newUrl = '/queries/selectTradeAgreement?agreementID=18'
+			console.log('GetQuery');
+			return this.http.get<Type[]>(url);
+		}
+
 /*
     public getAll(ns: string): Observable<Type[]> {
         console.log('GetAll ' + ns + ' to ' + this.actionUrl + ns);

@@ -8,7 +8,18 @@
 			<h2>Contract State: {{asset.state}}</h2>
 			<p>owner: {{asset.owner}}</p>
 			<p>oil lot: {{asset.oilLot}}</p>
-			<p>trade agreement: {{asset.tradeAgreement}}<button mat-flat-button>View Contract</button></p>
+			<p>trade agreement: {{asset.tradeAgreement}}
+				<button mat-flat-button (click)=getSubcontract(asset.tradeAgreement) >View Contract</button>
+					<mat-list-item *ngFor="let asset of subContracts">
+						<mat-card class="example-card">
+								<h1>Agreement ID: {{asset.agreementID}}</h1>
+								<h2>Contract State: {{asset.state}}</h2>
+								<p>Terms and Conditions: {{asset.terms}}</p>
+								<p>buyer: {{asset.buyer}}</p>
+								<p>buyer: {{asset.seller}}</p>
+						</mat-card>
+					</mat-list-item>
+			</p>
 
 		</body>
 

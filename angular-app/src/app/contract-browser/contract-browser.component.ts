@@ -13,7 +13,8 @@ export class ContractBrowserComponent implements OnInit {
 
 	myForm: FormGroup;
 
-  public allAssets;
+	public allAssets;
+	public subContracts;
   public asset;
   public currentId;
 	public errorMessage;
@@ -297,5 +298,35 @@ export class ContractBrowserComponent implements OnInit {
       'billofLadingTerms': null,
       'customsInspection': null
       });
-  }
+	}
+
+	getSubcontract = (id):Promise<any> => {
+		//console.log(id.match(/resource:org.fin798.group2.tradeAgreement#[0-9]*/))
+		//console.log(id.match(/#[0-9]*/))
+		const tempList = []
+		const filtered_id = id.match(/#[0-9]*/)[0].substring(1)
+		console.log("filtered id is: " + filtered_id)
+		return this.contractbrowserService.getQuery(filtered_id)
+    .toPromise()
+    .then((result) => {
+
+			this.errorMessage = null;
+			console.log(result)
+      result.forEach(asset => {
+        tempList.push(asset);
+      });
+			this.subContracts = tempList;
+			this.loadAll();
+			console.log("subContract: " + this.subContracts[0])
+    })
+    .catch((error) => {
+      if (error === 'Server error') {
+        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+      } else if (error === '404 - Not Found') {
+        this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
+      } else {
+        this.errorMessage = error;
+      }
+    });
+	}
 }
