@@ -125,25 +125,25 @@ transaction termsAgreement {
  --> masterContract contractReference
 }
 
-transaction shippingAgreement extends ownershipTransfer {
+transaction shippingAgreement {
 //This transaction updates the shippingAgreement contract from active to completed
 //Company Alpha is represents customs and will update contract state.
 //Company Alpha signs   
- --> shippingTerms contractReference
+ --> masterContract contractReference
 }
 
 transaction outboundCustoms extends ownershipTransfer {
 //This transaction updates the billofLadingTerms contract from active to completed
 //Company Alpha is represents customs and will update contract state.
 //Company Alpha signs 
- --> billofLadingTerms contractReference
+ --> masterContract contractReference
 }
 
 transaction inboundCustoms extends ownershipTransfer {
 //This transaction updates the customsInspection contract from active to completed
 //Company Alpha is represents customs and will update contract state.
 //Company Alpha signs
- --> customsInspection contractReference
+ --> masterContract contractReference
 }
 
 event TradeNotification {

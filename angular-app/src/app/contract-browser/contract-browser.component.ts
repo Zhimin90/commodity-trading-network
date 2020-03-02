@@ -2,13 +2,14 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { contractbrowserService} from './contract-browser.service';
 import { OilLotService } from '../OilLot/OilLot.service'
+import { shippingTermsService } from '../shippingTerms/shippingTerms.service'
 import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-contract-browser',
   templateUrl: './contract-browser.component.html',
 	styleUrls: ['./contract-browser.component.css'],
-  providers: [contractbrowserService,OilLotService]
+  providers: [contractbrowserService,OilLotService,shippingTermsService]
 })
 export class ContractBrowserComponent implements OnInit {
 
@@ -16,6 +17,7 @@ export class ContractBrowserComponent implements OnInit {
 
 	public allAssets;
 	public subContracts = {};
+	public shippingTerm = {};
 	public lotInfo = {};
   public asset;
   public currentId;
@@ -34,7 +36,7 @@ export class ContractBrowserComponent implements OnInit {
   billofLadingTerms = new FormControl('', Validators.required);
   customsInspection = new FormControl('', Validators.required);
 
-  constructor(public contractbrowserService: contractbrowserService, public OilLotService: OilLotService, fb: FormBuilder, private _formBuilder: FormBuilder) {
+  constructor(public contractbrowserService: contractbrowserService,public shippingTermsService: shippingTermsService, public OilLotService: OilLotService, fb: FormBuilder, private _formBuilder: FormBuilder) {
     this.myForm = fb.group({
       contractID: this.contractID,
       state: this.state,
@@ -321,6 +323,33 @@ export class ContractBrowserComponent implements OnInit {
 			this.subContracts[masterCon_id] = tempList;
 			this.loadAll();
 			console.log("subContract: " + this.subContracts[masterCon_id][0])
+    })
+    .catch((error) => {
+      if (error === 'Server error') {
+        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+      } else if (error === '404 - Not Found') {
+        this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
+      } else {
+        this.errorMessage = error;
+      }
+    });
+	}
+
+	getShippingTerm = (masterCon_id, con_id):Promise<any> => {
+		//console.log(id.match(/resource:org.fin798.group2.tradeAgreement#[0-9]*/))
+		//console.log(id.match(/#[0-9]*/))
+		const tempList = []
+		const filtered_id = con_id.match(/#[0-9]*/)[0].substring(1)
+		console.log("filtered id is: " + filtered_id)
+		return this.shippingTermsService.getAsset(filtered_id)
+    .toPromise()
+    .then((result) => {
+
+			this.errorMessage = null;
+			//console.log(result)
+			this.shippingTerm[masterCon_id] = [result];
+			console.log(this.shippingTerm[masterCon_id])
+			this.loadAll();
     })
     .catch((error) => {
       if (error === 'Server error') {

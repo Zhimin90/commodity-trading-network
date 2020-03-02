@@ -7,13 +7,18 @@
 			<h1>Contract ID: {{asset.contractID}}</h1>
 			<h2>Contract State: {{asset.state}}</h2>
 			<p>owner: {{asset.owner}}</p>
-			<p>oil lot: {{asset.oilLot}}</p>
+			<p>oil lot: {{asset.oilLot}}
 				<button mat-flat-button (click)=getLotInfo(asset.contractID,asset.oilLot) >View Lot Info</button>
 					<mat-list-item *ngFor="let asset of lotInfo[asset.contractID]">
 						<mat-card class="subContract-card">
 								<h1>Lot ID: {{asset.LotID}}</h1>
+								<p>Grade: {{asset.barrelGrade}}</p>
+								<p>Origination: {{asset.description}}</p>
+								<p>QTY: {{asset.quantity}}</p>
+								<p>Current Owner: {{asset.owner}}</p>
 						</mat-card>
 					</mat-list-item>
+			</p>
 			<p>trade agreement: {{asset.tradeAgreement}}
 				<button mat-flat-button (click)=getSubcontract(asset.contractID,asset.tradeAgreement) >View Contract</button>
 					<mat-list-item *ngFor="let asset of subContracts[asset.contractID]">
@@ -22,11 +27,22 @@
 								<h2>Contract State: {{asset.state}}</h2>
 								<p>Terms and Conditions: {{asset.terms}}</p>
 								<p>buyer: {{asset.buyer}}</p>
-								<p>buyer: {{asset.seller}}</p>
+								<p>seller: {{asset.seller}}</p>
 						</mat-card>
 					</mat-list-item>
 			</p>
-
+			<p>shipping terms: {{asset.shippingTerms}}
+					<button mat-flat-button (click)=getShippingTerm(asset.contractID,asset.shippingTerms) >View Contract</button>
+						<mat-list-item *ngFor="let asset of shippingTerm[asset.contractID]">
+							<mat-card class="subContract-card">
+									<h1>Shipment ID: {{asset.shippingID}}</h1>
+									<h2>Contract State: {{asset.state}}</h2>
+									<p>Terms and Conditions: {{asset.shippingDetails}}</p>
+									<p>vendor: {{asset.vendors}}</p>
+									<p>Lot info: {{asset.OilLot}}</p>
+							</mat-card>
+						</mat-list-item>
+			</p>
 		</body>
 
 		<mat-horizontal-stepper [linear]="isLinear" #stepper>
@@ -45,3 +61,4 @@
 	</mat-card>
 </mat-list-item>
 </div>
+

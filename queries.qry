@@ -7,10 +7,16 @@ query selectCommodities {
       SELECT org.fin798.group2.masterContract
 }
 
+query selectCompletedMasterContract {
+  description: "Select all masterContracts that are completed"
+  statement:
+      SELECT org.fin798.group2.masterContract
+  		WHERE( state == "Completed")
+}
+
 query selectTradeAgreement {
   description: "Select all TradeAgreements"
   statement:
       SELECT org.fin798.group2.tradeAgreement
         WHERE (agreementID == _$agreementID)
 }
-
