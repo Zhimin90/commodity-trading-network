@@ -1,17 +1,23 @@
 
 <div>
 <mat-list-item *ngFor="let asset of allAssets">
-	<mat-card class="example-card">
-
+	<p> </p>
+	<mat-card class="masterContract-card">
 		<body>
 			<h1>Contract ID: {{asset.contractID}}</h1>
 			<h2>Contract State: {{asset.state}}</h2>
 			<p>owner: {{asset.owner}}</p>
 			<p>oil lot: {{asset.oilLot}}</p>
+				<button mat-flat-button (click)=getLotInfo(asset.contractID,asset.oilLot) >View Lot Info</button>
+					<mat-list-item *ngFor="let asset of lotInfo[asset.contractID]">
+						<mat-card class="subContract-card">
+								<h1>Lot ID: {{asset.LotID}}</h1>
+						</mat-card>
+					</mat-list-item>
 			<p>trade agreement: {{asset.tradeAgreement}}
-				<button mat-flat-button (click)=getSubcontract(asset.tradeAgreement) >View Contract</button>
-					<mat-list-item *ngFor="let asset of subContracts">
-						<mat-card class="example-card">
+				<button mat-flat-button (click)=getSubcontract(asset.contractID,asset.tradeAgreement) >View Contract</button>
+					<mat-list-item *ngFor="let asset of subContracts[asset.contractID]">
+						<mat-card class="subContract-card">
 								<h1>Agreement ID: {{asset.agreementID}}</h1>
 								<h2>Contract State: {{asset.state}}</h2>
 								<p>Terms and Conditions: {{asset.terms}}</p>

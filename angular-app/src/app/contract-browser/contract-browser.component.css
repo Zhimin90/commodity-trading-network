@@ -1,5 +1,11 @@
-.example-card {
+.masterContract-card {
 	max-width: 600px;
 	top: 50%;
   left: 35%;
+}
+
+.subContract-card {
+	max-width: 400px;
+	top: 50%;
+  left: 15%;
 }

@@ -1,20 +1,22 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { contractbrowserService} from './contract-browser.service';
+import { OilLotService } from '../OilLot/OilLot.service'
 import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-contract-browser',
   templateUrl: './contract-browser.component.html',
 	styleUrls: ['./contract-browser.component.css'],
-  providers: [contractbrowserService]
+  providers: [contractbrowserService,OilLotService]
 })
 export class ContractBrowserComponent implements OnInit {
 
 	myForm: FormGroup;
 
 	public allAssets;
-	public subContracts;
+	public subContracts = {};
+	public lotInfo = {};
   public asset;
   public currentId;
 	public errorMessage;
@@ -32,7 +34,7 @@ export class ContractBrowserComponent implements OnInit {
   billofLadingTerms = new FormControl('', Validators.required);
   customsInspection = new FormControl('', Validators.required);
 
-  constructor(public contractbrowserService: contractbrowserService, fb: FormBuilder, private _formBuilder: FormBuilder) {
+  constructor(public contractbrowserService: contractbrowserService, public OilLotService: OilLotService, fb: FormBuilder, private _formBuilder: FormBuilder) {
     this.myForm = fb.group({
       contractID: this.contractID,
       state: this.state,
@@ -300,11 +302,12 @@ export class ContractBrowserComponent implements OnInit {
       });
 	}
 
-	getSubcontract = (id):Promise<any> => {
+
+	getSubcontract = (masterCon_id, subCon_id):Promise<any> => {
 		//console.log(id.match(/resource:org.fin798.group2.tradeAgreement#[0-9]*/))
 		//console.log(id.match(/#[0-9]*/))
 		const tempList = []
-		const filtered_id = id.match(/#[0-9]*/)[0].substring(1)
+		const filtered_id = subCon_id.match(/#[0-9]*/)[0].substring(1)
 		console.log("filtered id is: " + filtered_id)
 		return this.contractbrowserService.getQuery(filtered_id)
     .toPromise()
@@ -315,9 +318,36 @@ export class ContractBrowserComponent implements OnInit {
       result.forEach(asset => {
         tempList.push(asset);
       });
-			this.subContracts = tempList;
+			this.subContracts[masterCon_id] = tempList;
 			this.loadAll();
-			console.log("subContract: " + this.subContracts[0])
+			console.log("subContract: " + this.subContracts[masterCon_id][0])
+    })
+    .catch((error) => {
+      if (error === 'Server error') {
+        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+      } else if (error === '404 - Not Found') {
+        this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
+      } else {
+        this.errorMessage = error;
+      }
+    });
+	}
+
+	getLotInfo = (masterCon_id, lot_id):Promise<any> => {
+		//console.log(id.match(/resource:org.fin798.group2.tradeAgreement#[0-9]*/))
+		//console.log(id.match(/#[0-9]*/))
+		const tempList = []
+		const filtered_id = lot_id.match(/#[0-9]*/)[0].substring(1)
+		console.log("filtered id is: " + filtered_id)
+		return this.OilLotService.getAsset(filtered_id)
+    .toPromise()
+    .then((result) => {
+
+			this.errorMessage = null;
+			//console.log(result)
+			this.lotInfo[masterCon_id] = [result];
+			console.log(this.lotInfo[masterCon_id])
+			this.loadAll();
     })
     .catch((error) => {
       if (error === 'Server error') {
